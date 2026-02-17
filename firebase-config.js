@@ -56,25 +56,21 @@ const firebaseConfig = {
         testId:      session.testId,
         uuid:        session.uuid,
         submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
-        participant: JSON.parse(JSON.stringify({
-          fields:    session.participant.name    || [],
-          responses: session.participant.response || []
-        })),
-        trials: JSON.parse(JSON.stringify((session.trials || []).map(function (trial) {
+        participant: {
+          fields:    session.participant.name,
+          responses: session.participant.response
+        },
+        trials: session.trials.map(function (trial) {
           return {
-            id:        trial.id   || null,
-            type:      trial.type || null,
-            responses: (trial.responses || []).map(function (r) {
+            id:     trial.id,
+            scores: trial.responses.map(function (r) {
               return {
-                stimulusId: r.stimulus ? r.stimulus.id       : null,
-                filepath:   r.stimulus ? r.stimulus.filepath : null,
-                score:      r.score   !== undefined ? r.score   : null,
-                comment:    r.comment !== undefined ? r.comment : null,
-                time:       r.time    !== undefined ? r.time    : null
+                condition: r.stimulus.id,
+                score:     r.score
               };
             })
           };
-        })))
+        })
       };
 
       return db.collection('mushra_results')
