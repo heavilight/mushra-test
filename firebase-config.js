@@ -52,6 +52,13 @@ const firebaseConfig = {
 
     // Exposed globally so DataSender can call it
     window.sendToFirebase = function (session) {
+      // Firestore rejects undefined values; replace them with null
+      function sanitize(obj) {
+        return JSON.parse(JSON.stringify(obj, function (_k, v) {
+          return v === undefined ? null : v;
+        }));
+      }
+
       var payload = {
         testId:      session.testId,
         uuid:        session.uuid,
@@ -63,9 +70,10 @@ const firebaseConfig = {
         trials: session.trials.map(function (trial) {
           return {
             id:     trial.id,
-            scores: trial.responses.map(function (r) {
+            type:   trial.type,
+            scores: (trial.responses || []).map(function (r) {
               return {
-                condition: r.stimulus.id,
+                condition: r.stimulus,   // stimulus is a string, not an object
                 score:     r.score
               };
             })
@@ -74,7 +82,7 @@ const firebaseConfig = {
       };
 
       return db.collection('mushra_results')
-        .add(payload)
+        .add(sanitize(payload))
         .then(function (ref) {
           console.log('[Firebase] Results saved – document id:', ref.id);
         })
