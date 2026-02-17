@@ -64,7 +64,15 @@ const firebaseConfig = {
           return {
             id:        trial.id,
             type:      trial.type,
-            responses: trial.responses || []
+            responses: (trial.responses || []).map(function (r) {
+              return {
+                stimulusId: r.stimulus ? r.stimulus.id       : null,
+                filepath:   r.stimulus ? r.stimulus.filepath : null,
+                score:      r.score,
+                comment:    r.comment,
+                time:       r.time
+              };
+            })
           };
         })
       };
