@@ -1,0 +1,173 @@
+testname: Audio Compression Quality Test
+testId: mytest
+bufferSize: 2048
+stopOnErrors: true
+showButtonPreviousPage: false
+remoteService: service/write.php
+
+pages:
+
+    - type: generic
+      id: welcome
+      name: Welcome
+      content: >
+        <p><strong>Welcome to this audio compression quality test.</strong></p>
+        <p>You will listen to a series of short audio clips and rate the quality
+        of each condition compared to a <em>Reference</em> recording.</p>
+        <p><strong>Please use headphones</strong> and find a quiet environment before starting.</p>
+        <p>The test contains 6 trials (3 speech, 3 music) presented in random order
+        and takes roughly 10–15 minutes to complete.</p>
+        <p>Press <strong>Next</strong> to begin.</p>
+
+    -
+        - random
+
+        - type: mushra
+          id: speech1
+          name: "Speech – Sample 1"
+          content: >
+            Listen to the <strong>Reference</strong> first, then rate the quality of each
+            condition on a scale from 0 (Bad) to 100 (Excellent).
+            Play each condition as many times as you like before submitting your ratings.
+          showWaveform: true
+          enableLooping: true
+          reference: configs/resources/audio/mytest/speech1/reference.wav
+          createAnchor35: false
+          createAnchor70: false
+          stimuli:
+              LP35:  configs/resources/audio/mytest/speech1/filtered.wav
+              ADPCM: configs/resources/audio/mytest/speech1/adpcm.wav
+              Low:   configs/resources/audio/mytest/speech1/low.wav
+              Med:   configs/resources/audio/mytest/speech1/med.wav
+              High:  configs/resources/audio/mytest/speech1/high.wav
+
+        - type: mushra
+          id: speech2
+          name: "Speech – Sample 2"
+          content: >
+            Listen to the <strong>Reference</strong> first, then rate the quality of each
+            condition on a scale from 0 (Bad) to 100 (Excellent).
+            Play each condition as many times as you like before submitting your ratings.
+          showWaveform: true
+          enableLooping: true
+          reference: configs/resources/audio/mytest/speech2/reference.wav
+          createAnchor35: false
+          createAnchor70: false
+          stimuli:
+              LP35:  configs/resources/audio/mytest/speech2/filtered.wav
+              ADPCM: configs/resources/audio/mytest/speech2/adpcm.wav
+              Low:   configs/resources/audio/mytest/speech2/low.wav
+              Med:   configs/resources/audio/mytest/speech2/med.wav
+              High:  configs/resources/audio/mytest/speech2/high.wav
+
+        - type: mushra
+          id: speech3
+          name: "Speech – Sample 3"
+          content: >
+            Listen to the <strong>Reference</strong> first, then rate the quality of each
+            condition on a scale from 0 (Bad) to 100 (Excellent).
+            Play each condition as many times as you like before submitting your ratings.
+          showWaveform: true
+          enableLooping: true
+          reference: configs/resources/audio/mytest/speech3/reference.wav
+          createAnchor35: false
+          createAnchor70: false
+          stimuli:
+              LP35:  configs/resources/audio/mytest/speech3/filtered.wav
+              ADPCM: configs/resources/audio/mytest/speech3/adpcm.wav
+              Low:   configs/resources/audio/mytest/speech3/low.wav
+              Med:   configs/resources/audio/mytest/speech3/med.wav
+              High:  configs/resources/audio/mytest/speech3/high.wav
+
+        - type: mushra
+          id: music1
+          name: "Music – Sample 1"
+          content: >
+            Listen to the <strong>Reference</strong> first, then rate the quality of each
+            condition on a scale from 0 (Bad) to 100 (Excellent).
+            Play each condition as many times as you like before submitting your ratings.
+          showWaveform: true
+          enableLooping: true
+          reference: configs/resources/audio/mytest/music1/reference.wav
+          createAnchor35: false
+          createAnchor70: false
+          stimuli:
+              LP35:  configs/resources/audio/mytest/music1/filtered.wav
+              ADPCM: configs/resources/audio/mytest/music1/adpcm.wav
+              Low:   configs/resources/audio/mytest/music1/low.wav
+              Med:   configs/resources/audio/mytest/music1/med.wav
+              High:  configs/resources/audio/mytest/music1/high.wav
+
+        - type: mushra
+          id: music2
+          name: "Music – Sample 2"
+          content: >
+            Listen to the <strong>Reference</strong> first, then rate the quality of each
+            condition on a scale from 0 (Bad) to 100 (Excellent).
+            Play each condition as many times as you like before submitting your ratings.
+          showWaveform: true
+          enableLooping: true
+          reference: configs/resources/audio/mytest/music2/reference.wav
+          createAnchor35: false
+          createAnchor70: false
+          stimuli:
+              LP35:  configs/resources/audio/mytest/music2/filtered.wav
+              ADPCM: configs/resources/audio/mytest/music2/adpcm.wav
+              Low:   configs/resources/audio/mytest/music2/low.wav
+              Med:   configs/resources/audio/mytest/music2/med.wav
+              High:  configs/resources/audio/mytest/music2/high.wav
+
+        - type: mushra
+          id: music3
+          name: "Music – Sample 3"
+          content: >
+            Listen to the <strong>Reference</strong> first, then rate the quality of each
+            condition on a scale from 0 (Bad) to 100 (Excellent).
+            Play each condition as many times as you like before submitting your ratings.
+          showWaveform: true
+          enableLooping: true
+          reference: configs/resources/audio/mytest/music3/reference.wav
+          createAnchor35: false
+          createAnchor70: false
+          stimuli:
+              LP35:  configs/resources/audio/mytest/music3/filtered.wav
+              ADPCM: configs/resources/audio/mytest/music3/adpcm.wav
+              Low:   configs/resources/audio/mytest/music3/low.wav
+              Med:   configs/resources/audio/mytest/music3/med.wav
+              High:  configs/resources/audio/mytest/music3/high.wav
+
+    - type: finish
+      name: Thank You
+      content: >
+        <p><strong>Thank you for completing the test!</strong></p>
+        <p>Please fill in the short form below and click <em>Send Results</em>.</p>
+      popupContent: Your results have been submitted. Thank you for your time!
+      showResults: false
+      writeResults: true
+      questionnaire:
+          - type: likert
+            name: headphones
+            label: "Listening device"
+            response:
+              - value: headphones
+                label: Headphones
+              - value: earbuds
+                label: Earbuds
+              - value: speakers
+                label: Speakers
+          - type: number
+            label: "Age"
+            name: age
+            min: 10
+            max: 100
+            default: 25
+          - type: likert
+            name: experience
+            label: "Audio experience"
+            response:
+              - value: naive
+                label: No training
+              - value: intermediate
+                label: Some training
+              - value: expert
+                label: Expert listener
